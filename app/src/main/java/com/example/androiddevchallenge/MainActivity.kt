@@ -18,44 +18,65 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.androiddevchallenge.ui.theme.MyTheme
+import androidx.navigation.NavType
+import androidx.navigation.compose.*
+import com.example.androiddevchallenge.data.AdoptionCenter
+import com.example.androiddevchallenge.nav.Route
+import com.example.androiddevchallenge.ui.detail.DogDetail
+import com.example.androiddevchallenge.ui.feed.PawesomeFeed
+import com.example.androiddevchallenge.ui.theme.PawesomeTheme
 
 class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MyTheme {
-                MyApp()
-            }
-        }
-    }
-}
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setContent {
+			val navController = rememberNavController()
 
-// Start building your app here!
-@Composable
-fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
-    }
-}
+			NavHost(navController = navController, startDestination = Route.Feed.route, builder = {
+				composable(Route.Feed.route) {
+					PawesomeTheme {
+						PawesomeFeed(
+							onNavigateToDog = { dog ->
+								navController.navigate(Route.Detail.withArg(dog.name))
+							}
+						)
+					}
+				}
 
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun LightPreview() {
-    MyTheme {
-        MyApp()
-    }
-}
+				composable(
+					Route.Detail.route,
+					arguments = listOf(navArgument(Route.Detail.token) {
+						type = NavType.StringType
+						defaultValue = AdoptionCenter.dogs.last().name
+						nullable = false
+					})
+				) { backstackEntry ->
 
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DarkPreview() {
-    MyTheme(darkTheme = true) {
-        MyApp()
-    }
+					val name = backstackEntry.arguments?.getString(Route.Detail.token)
+
+					DogDetail(
+						navController,
+						dogName = name
+					)
+				}
+
+				composable(
+					Route.Dolly.route,
+					arguments = listOf(navArgument(Route.Dolly.token) {
+						type = NavType.StringType
+						defaultValue = AdoptionCenter.dogs.last().name
+						nullable = false
+					})
+				) { backstackEntry ->
+
+					val name = backstackEntry.arguments?.getString(Route.Dolly.token)
+
+					DogDetail(
+						navController,
+						dogName = name
+					)
+				}
+			})
+		}
+	}
 }

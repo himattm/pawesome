@@ -21,3 +21,16 @@ val purple200 = Color(0xFFBB86FC)
 val purple500 = Color(0xFF6200EE)
 val purple700 = Color(0xFF3700B3)
 val teal200 = Color(0xFF03DAC5)
+
+object PawesomeColor {
+	val white = Color(0xFFFFFFFF)
+
+	val lightGrayishRed = Color(0xFFF9EDEA)
+	val grayishCyan = Color(0xFFAEBABC)
+	val desaturatedBlue = Color(0xFF6FA9D0)
+	val brightOrange = Color(0xFFF3A131)
+	val veryDarkGrayishRed = Color(0xFF342826)
+	val moderateOrange = Color(0xFFC75B32)
+	val darkModerateBlue = Color(0xFF4B758B)
+	val desaturatedDarkBlue = Color(0xFF6093AA)
+}
