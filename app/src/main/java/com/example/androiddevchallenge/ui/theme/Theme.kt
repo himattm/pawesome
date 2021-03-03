@@ -26,38 +26,38 @@ import com.example.androiddevchallenge.ui.theme.PawesomeColor.darkModerateBlue
 import com.example.androiddevchallenge.ui.theme.PawesomeColor.desaturatedBlue
 
 private val DarkColorPalette = darkColors(
-  primary = PawesomeColor.desaturatedBlue,
-  primaryVariant = PawesomeColor.darkModerateBlue,
-  secondary = PawesomeColor.brightOrange,
-  surface = PawesomeColor.veryDarkGrayishRed,
-  onSurface = Color.White,
-  onPrimary = Color.White,
-  onSecondary = Color.White
+    primary = PawesomeColor.desaturatedBlue,
+    primaryVariant = PawesomeColor.darkModerateBlue,
+    secondary = PawesomeColor.brightOrange,
+    surface = PawesomeColor.veryDarkGrayishRed,
+    onSurface = Color.White,
+    onPrimary = Color.White,
+    onSecondary = Color.White
 )
 
 private val LightColorPalette = lightColors(
-  primary = desaturatedBlue,
-  primaryVariant = darkModerateBlue,
-  secondary = brightOrange,
-  surface = PawesomeColor.lightGrayishRed,
-  onSurface = Color.Black,
+    primary = desaturatedBlue,
+    primaryVariant = darkModerateBlue,
+    secondary = brightOrange,
+    surface = PawesomeColor.lightGrayishRed,
+    onSurface = Color.Black,
 )
 
 @Composable
 fun PawesomeTheme(
-  darkTheme: Boolean = isSystemInDarkTheme(),
-  content: @Composable() () -> Unit
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable() () -> Unit
 ) {
-  val colors = if (darkTheme) {
-    DarkColorPalette
-  } else {
-    LightColorPalette
-  }
+    val colors = if (darkTheme) {
+        DarkColorPalette
+    } else {
+        LightColorPalette
+    }
 
-  MaterialTheme(
-    colors = colors,
-    typography = typography,
-    shapes = shapes,
-    content = content
-  )
+    MaterialTheme(
+        colors = colors,
+        typography = typography,
+        shapes = shapes,
+        content = content
+    )
 }

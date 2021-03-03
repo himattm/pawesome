@@ -51,71 +51,71 @@ import com.example.androiddevchallenge.ui.theme.typography
 
 @Composable
 fun FavoriteHeart() {
-  val isFavorite = remember { mutableStateOf(false) }
-  val color = animateColorAsState(
-    if (isFavorite.value) {
-      PawesomeColor.brightOrange
-    } else {
-      if (isSystemInDarkTheme()) {
-        Color.White
-      } else {
-        Color.Black
-      }
-    }
-  )
-
-  IconButton(
-    modifier = Modifier,
-    onClick = { isFavorite.value = isFavorite.value.not() }
-  ) {
-    Icon(
-      imageVector = if (isFavorite.value) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-      contentDescription = "Favorite",
-      tint = color.value
+    val isFavorite = remember { mutableStateOf(false) }
+    val color = animateColorAsState(
+        if (isFavorite.value) {
+            PawesomeColor.brightOrange
+        } else {
+            if (isSystemInDarkTheme()) {
+                Color.White
+            } else {
+                Color.Black
+            }
+        }
     )
-  }
+
+    IconButton(
+        modifier = Modifier,
+        onClick = { isFavorite.value = isFavorite.value.not() }
+    ) {
+        Icon(
+            imageVector = if (isFavorite.value) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+            contentDescription = "Favorite",
+            tint = color.value
+        )
+    }
 }
 
 @Preview("Item", widthDp = 360)
 @Composable
 fun FeedItem(
-  dog: Dog = AdoptionCenter.dogs.first(),
-  onNavigateToDog: (Dog) -> Unit = {}
+    dog: Dog = AdoptionCenter.dogs.first(),
+    onNavigateToDog: (Dog) -> Unit = {}
 ) {
-  Card(
-    modifier = Modifier
-      .padding(8.dp)
-      .fillMaxWidth()
-      .clip(RoundedCornerShape(8.dp))
-      .clickable { onNavigateToDog(dog) }
-  ) {
-    Column(
-      verticalArrangement = Arrangement.SpaceBetween,
-      horizontalAlignment = Alignment.CenterHorizontally
+    Card(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp))
+            .clickable { onNavigateToDog(dog) }
     ) {
-      Image(
-        alignment = Alignment.TopCenter,
-        modifier = Modifier
-          .height(250.dp)
-          .fillMaxWidth()
-          .clip(RoundedCornerShape(8.dp)),
-        painter = painterResource(id = dog.images.first()),
-        contentDescription = dog.name,
-        contentScale = ContentScale.Crop
-      )
-      Row(
-        modifier = Modifier
-          .fillMaxWidth()
-          .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-      ) {
-        Text(
-          text = "${dog.name} from ${dog.location}",
-          style = typography.body1
-        )
-        FavoriteHeart()
-      }
+        Column(
+            verticalArrangement = Arrangement.SpaceBetween,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                alignment = Alignment.TopCenter,
+                modifier = Modifier
+                    .height(250.dp)
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(8.dp)),
+                painter = painterResource(id = dog.images.first()),
+                contentDescription = dog.name,
+                contentScale = ContentScale.Crop
+            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "${dog.name} from ${dog.location}",
+                    style = typography.body1
+                )
+                FavoriteHeart()
+            }
+        }
     }
-  }
 }

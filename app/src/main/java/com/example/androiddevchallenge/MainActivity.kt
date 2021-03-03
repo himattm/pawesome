@@ -31,41 +31,41 @@ import com.example.androiddevchallenge.ui.feed.PawesomeFeed
 import com.example.androiddevchallenge.ui.theme.PawesomeTheme
 
 class MainActivity : AppCompatActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContent {
-      val navController = rememberNavController()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            val navController = rememberNavController()
 
-      NavHost(
-        navController = navController,
-        startDestination = Route.Feed.route,
-        builder = {
-          composable(Route.Feed.route) {
-            PawesomeTheme {
-              PawesomeFeed(
-                onNavigateToDog = { dog ->
-                  navController.navigate(Route.Detail.withArg(dog.name))
+            NavHost(
+                navController = navController,
+                startDestination = Route.Feed.route,
+                builder = {
+                    composable(Route.Feed.route) {
+                        PawesomeTheme {
+                            PawesomeFeed(
+                                onNavigateToDog = { dog ->
+                                    navController.navigate(Route.Detail.withArg(dog.name))
+                                }
+                            )
+                        }
+                    }
+
+                    composable(
+                        Route.Detail.route,
+                        arguments = listOf(
+                            navArgument(Route.Detail.token) {
+                                type = NavType.StringType
+                                defaultValue = AdoptionCenter.dogs.last().name
+                                nullable = false
+                            }
+                        )
+                    ) { backstackEntry ->
+                        DogDetail(
+                            dogName = backstackEntry.arguments?.getString(Route.Detail.token)
+                        )
+                    }
                 }
-              )
-            }
-          }
-
-          composable(
-            Route.Detail.route,
-            arguments = listOf(
-              navArgument(Route.Detail.token) {
-                type = NavType.StringType
-                defaultValue = AdoptionCenter.dogs.last().name
-                nullable = false
-              }
             )
-          ) { backstackEntry ->
-            DogDetail(
-              dogName = backstackEntry.arguments?.getString(Route.Detail.token)
-            )
-          }
         }
-      )
     }
-  }
 }

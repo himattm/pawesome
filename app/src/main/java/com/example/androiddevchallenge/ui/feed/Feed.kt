@@ -34,70 +34,70 @@ import com.example.androiddevchallenge.ui.theme.PawesomeTheme
 
 @Composable
 fun PawesomeFeed(
-  onNavigateToDog: (Dog) -> Unit,
+    onNavigateToDog: (Dog) -> Unit,
 ) {
-  Scaffold(
-    topBar = { PawesomeTopBar() },
-  ) {
-    Feed(
-      dogs = AdoptionCenter.dogs,
-      onNavigateToDog = onNavigateToDog
-    )
-  }
+    Scaffold(
+        topBar = { PawesomeTopBar() },
+    ) {
+        Feed(
+            dogs = AdoptionCenter.dogs,
+            onNavigateToDog = onNavigateToDog
+        )
+    }
 }
 
 @Composable
 fun PawesomeTopBar() {
-  TopAppBar(
-    title = {
-      Text(text = "Pawesome")
-    },
-    actions = {
-      IconButton(onClick = { /*TODO*/ }) {
-        Icon(Icons.Default.Search, contentDescription = "Search")
-      }
-    }
-  )
+    TopAppBar(
+        title = {
+            Text(text = "Pawesome")
+        },
+        actions = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Default.Search, contentDescription = "Search")
+            }
+        }
+    )
 }
 
 @Composable
 fun Feed(
-  dogs: List<Dog>,
-  onNavigateToDog: (Dog) -> Unit,
-  modifier: Modifier = Modifier
+    dogs: List<Dog>,
+    onNavigateToDog: (Dog) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-  val scrollState = rememberLazyListState()
+    val scrollState = rememberLazyListState()
 
-  LazyColumn(
-    modifier = modifier,
-    state = scrollState,
-    content = {
-      items(dogs) { dog ->
-        FeedItem(
-          dog = dog,
-          onNavigateToDog = onNavigateToDog
-        )
-      }
-    }
-  )
+    LazyColumn(
+        modifier = modifier,
+        state = scrollState,
+        content = {
+            items(dogs) { dog ->
+                FeedItem(
+                    dog = dog,
+                    onNavigateToDog = onNavigateToDog
+                )
+            }
+        }
+    )
 }
 
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun LightPreview() {
-  PawesomeTheme {
-    PawesomeFeed(
-      onNavigateToDog = {}
-    )
-  }
+    PawesomeTheme {
+        PawesomeFeed(
+            onNavigateToDog = {}
+        )
+    }
 }
 
 @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
-  PawesomeTheme(darkTheme = true) {
-    PawesomeFeed(
-      onNavigateToDog = {}
-    )
-  }
+    PawesomeTheme(darkTheme = true) {
+        PawesomeFeed(
+            onNavigateToDog = {}
+        )
+    }
 }
