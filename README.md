@@ -12,6 +12,9 @@ Check out the `Route.kt` file and `MainActivity.kt`. I think this is a pretty ni
 handling standard and tokenized routes for navigation. It is expressive and allows for easy
 discoverability.
 
+Also, the image on the details screen is an auto scrolling gallery! I was very impressed with how
+easy it was to implement.
+
 ## :camera_flash: Screenshots
 
 <img src="/results/screenshot_1.webp" width="260">
