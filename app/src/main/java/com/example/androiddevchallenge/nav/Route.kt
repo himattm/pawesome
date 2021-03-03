@@ -10,4 +10,5 @@ sealed class Route(
 
 	object Feed : Route("feed")
 	object Detail : Route("detail", "dogName")
+	object Settings : Route("settings", "user")
 }

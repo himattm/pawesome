@@ -22,9 +22,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.data.AdoptionCenter
 import com.example.androiddevchallenge.data.Dog
+import com.example.androiddevchallenge.ui.theme.PawesomeColor
 import com.example.androiddevchallenge.ui.theme.typography
 
 @Composable
@@ -32,7 +34,7 @@ fun FavoriteHeart() {
 	val isFavorite = remember { mutableStateOf(false) }
 	val color = animateColorAsState(
 		if (isFavorite.value) {
-			Color.Red
+			PawesomeColor.brightOrange
 		} else {
 			if (isSystemInDarkTheme()) {
 				Color.White
@@ -48,13 +50,13 @@ fun FavoriteHeart() {
 	) {
 		Icon(
 			imageVector = if (isFavorite.value) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-			contentDescription = "Search",
+			contentDescription = "Favorite",
 			tint = color.value
 		)
 	}
 }
 
-//@Preview("Item", widthDp = 360)
+@Preview("Item", widthDp = 360)
 @Composable
 fun FeedItem(
 	dog: Dog = AdoptionCenter.dogs.first(),
@@ -65,9 +67,7 @@ fun FeedItem(
 			.padding(8.dp)
 			.fillMaxWidth()
 			.clip(RoundedCornerShape(8.dp))
-			.clickable {
-				onNavigateToDog(dog)
-			}
+			.clickable { onNavigateToDog(dog) }
 	) {
 		Column(
 			verticalArrangement = Arrangement.SpaceBetween,

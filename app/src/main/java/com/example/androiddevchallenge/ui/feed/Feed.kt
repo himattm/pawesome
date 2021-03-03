@@ -9,8 +9,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.androiddevchallenge.data.AdoptionCenter
 import com.example.androiddevchallenge.data.Dog
+import com.example.androiddevchallenge.ui.theme.PawesomeTheme
 
 
 @Composable
@@ -64,24 +66,22 @@ fun Feed(
 	)
 }
 
-//
-//@Preview("Light Theme", widthDp = 360, heightDp = 640)
-//@Composable
-//fun LightPreview() {
-//	PawesomeTheme {
-//		PawesomeFeed(
-//			NavHostController(),
-//			onNavigateToDog = {}
-//		)
-//	}
-//}
-//
-//@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-//@Composable
-//fun DarkPreview() {
-//	PawesomeTheme(darkTheme = true) {
-//		PawesomeFeed(
-//			onNavigateToDog = {}
-//		)
-//	}
-//}
+@Preview("Light Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun LightPreview() {
+	PawesomeTheme {
+		PawesomeFeed(
+			onNavigateToDog = {}
+		)
+	}
+}
+
+@Preview("Dark Theme", widthDp = 360, heightDp = 640)
+@Composable
+fun DarkPreview() {
+	PawesomeTheme(darkTheme = true) {
+		PawesomeFeed(
+			onNavigateToDog = {}
+		)
+	}
+}

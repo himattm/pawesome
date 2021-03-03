@@ -32,51 +32,34 @@ class MainActivity : AppCompatActivity() {
 		setContent {
 			val navController = rememberNavController()
 
-			NavHost(navController = navController, startDestination = Route.Feed.route, builder = {
-				composable(Route.Feed.route) {
-					PawesomeTheme {
-						PawesomeFeed(
-							onNavigateToDog = { dog ->
-								navController.navigate(Route.Detail.withArg(dog.name))
-							}
+			NavHost(
+				navController = navController,
+				startDestination = Route.Feed.route,
+				builder = {
+					composable(Route.Feed.route) {
+						PawesomeTheme {
+							PawesomeFeed(
+								onNavigateToDog = { dog ->
+									navController.navigate(Route.Detail.withArg(dog.name))
+								}
+							)
+						}
+					}
+
+					composable(
+						Route.Detail.route,
+						arguments = listOf(navArgument(Route.Detail.token) {
+							type = NavType.StringType
+							defaultValue = AdoptionCenter.dogs.last().name
+							nullable = false
+						})
+					) { backstackEntry ->
+						DogDetail(
+							dogName = backstackEntry.arguments?.getString(Route.Detail.token)
 						)
 					}
 				}
-
-				composable(
-					Route.Detail.route,
-					arguments = listOf(navArgument(Route.Detail.token) {
-						type = NavType.StringType
-						defaultValue = AdoptionCenter.dogs.last().name
-						nullable = false
-					})
-				) { backstackEntry ->
-
-					val name = backstackEntry.arguments?.getString(Route.Detail.token)
-
-					DogDetail(
-						navController,
-						dogName = name
-					)
-				}
-
-				composable(
-					Route.Dolly.route,
-					arguments = listOf(navArgument(Route.Dolly.token) {
-						type = NavType.StringType
-						defaultValue = AdoptionCenter.dogs.last().name
-						nullable = false
-					})
-				) { backstackEntry ->
-
-					val name = backstackEntry.arguments?.getString(Route.Dolly.token)
-
-					DogDetail(
-						navController,
-						dogName = name
-					)
-				}
-			})
+			)
 		}
 	}
 }
